@@ -35,3 +35,17 @@ export interface CountryData {
   name: string;
   value: string;
 }
+
+export interface DataForChart {
+  cases: {
+    [key: string]: number;
+  };
+  deaths: {
+    [key: string]: number;
+  };
+  recovered: {
+    [key: string]: number;
+  };
+}
+
+export type ChartData = { x: string; y: number }[];

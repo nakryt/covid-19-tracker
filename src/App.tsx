@@ -8,6 +8,7 @@ import InfoBox from "./components/InfoBox/InfoBox";
 import Map from "./components/Map/Map";
 import { ResponseData } from "./types";
 import Table from "./components/Table/Table";
+import LineGraph from "./components/LineGraph/LineGraph";
 
 function App() {
   const [countries, setCountries] = useState<ResponseData[]>([]);
@@ -59,8 +60,8 @@ function App() {
         <CardContent>
           <h3>Live Cases By Country</h3>
           <Table countries={countries} />
-          {/* Graph  */}
-          <h3>Worldwide new cases</h3>
+
+          <LineGraph />
         </CardContent>
       </Card>
     </div>
