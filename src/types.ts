@@ -31,7 +31,7 @@ export interface ResponseData {
   criticalPerOneMillion: number;
 }
 
-export interface CountriesData {
+export interface CountryData {
   name: string;
   value: string;
 }

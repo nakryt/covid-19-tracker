@@ -1,0 +1,26 @@
+@import "src/styles/colors";
+
+.table {
+  height: 400px;
+  margin-top: 1.2rem;
+  overflow: auto;
+  color: $table-color;
+
+  tr {
+    display: flex;
+    justify-content: space-between;
+  }
+
+  tr:nth-of-type(odd) {
+    background-color: $background-main;
+  }
+
+  td {
+    padding: 0.5rem;
+
+    span {
+      margin-right: 0.5rem;
+      font-weight: 800;
+    }
+  }
+}

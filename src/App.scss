@@ -1,6 +1,19 @@
 @import "styles/reset";
+@import "styles/breakpoints";
 
 .app {
+  display: flex;
+  justify-content: space-evenly;
+  padding: 1.2rem;
+
+  @include for-desktop-down {
+    flex-direction: column;
+  }
+
+  .app__left {
+    flex: 0.9;
+  }
+
   .app__stats {
     display: flex;
     justify-content: space-between;
