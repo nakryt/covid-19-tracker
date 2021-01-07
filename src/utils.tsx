@@ -6,25 +6,6 @@ import { CountryData, DataForChart, ChartData, CaseType } from "./types";
 export const sortData = (data: CountryData[]) =>
   data.slice().sort((a, b) => b.cases - a.cases);
 
-// export const formatCartData = (
-//   data: DataForChart,
-//   casesType: Cases = "cases"
-// ) => {
-//   const chartData: ChartData = [];
-//   let lastDatePoint: number;
-//   Object.entries(data[casesType]).forEach(([date, value]) => {
-//     if (lastDatePoint) {
-//       const newDataPoint = {
-//         x: date,
-//         y: value - lastDatePoint,
-//       };
-//       chartData.push(newDataPoint);
-//     }
-//     lastDatePoint = data[casesType][date];
-//   });
-//   return chartData;
-// };
-
 export const formatCartData = (
   data: DataForChart,
   casesType: CaseType = "cases"
@@ -47,34 +28,33 @@ export const formatCartData = (
 const casesTypeColors = {
   cases: {
     hex: "#CC1034",
-    multiplier: 300,
+    multiplier: 250,
   },
   recovered: {
     hex: "#7dd71d",
-    multiplier: 1200,
+    multiplier: 150,
   },
   deaths: {
-    hex: "#fb4443",
-    multiplier: 2000,
+    hex: "#920303",
+    multiplier: 300,
   },
 };
 
-export const showDataOnMap = (
-  data: CountryData[],
-  casesType: CaseType = "cases"
-) =>
-  data.map((country) => (
+export const showDataOnMap = (data: CountryData[], casesType: CaseType) => {
+  return data.map((country) => (
     <Circle
       center={[country.countryInfo.lat, country.countryInfo.long]}
       fillOpacity={0.4}
-      color={casesTypeColors[casesType].hex}
-      fillColor={casesTypeColors[casesType].hex}
+      pathOptions={{
+        color: casesTypeColors[casesType].hex,
+        fillColor: casesTypeColors[casesType].hex,
+      }}
       radius={
         Math.sqrt(country[casesType]) * casesTypeColors[casesType].multiplier
       }
       key={country.country}
     >
-      <Popup>
+      <Popup autoClose={true}>
         <div className="info-container">
           <div
             className="info-flag"
@@ -95,3 +75,7 @@ export const showDataOnMap = (
       </Popup>
     </Circle>
   ));
+};
+
+export const prettyPrintStat = (stat: number) =>
+  stat ? `+${numeral(stat).format("0.0a")}` : "+0";

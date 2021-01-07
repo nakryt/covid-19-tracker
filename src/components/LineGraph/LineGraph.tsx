@@ -1,10 +1,11 @@
-import React, { useEffect, useState } from "react";
+import React, { FC, useEffect, useState } from "react";
 import "./LineGraph.scss";
 
 import { Line } from "react-chartjs-2";
 import numeral from "numeral";
-import { ChartData, DataForChart } from "../../types";
 import { formatCartData } from "../../utils";
+import color from "../../styles/color";
+import { CaseType, ChartData, DataForChart } from "../../types";
 
 const options = {
   legend: false,
@@ -49,7 +50,11 @@ const options = {
   },
 };
 
-const LineGraph = () => {
+interface Props {
+  casesType: CaseType;
+}
+
+const LineGraph: FC<Props> = ({ casesType }) => {
   const [data, setData] = useState<ChartData>({} as ChartData);
 
   useEffect(() => {
@@ -60,39 +65,31 @@ const LineGraph = () => {
         );
         if (response.ok) {
           const data = (await response.json()) as DataForChart;
-          setData(formatCartData(data));
+          setData(formatCartData(data, casesType));
         }
       } catch (e) {}
     };
 
-    let isCancel = false;
-    if (!isCancel) {
-      getData();
-    }
-
-    return () => {
-      isCancel = true;
-    };
-  }, []);
+    getData();
+  }, [casesType]);
 
   return (
     <div className="lineGraph">
-      <h3 className="lineGraph__title">Worldwide new cases</h3>
+      <h3 className="lineGraph__title">Worldwide new {casesType}</h3>
       {Object.keys(data).length > 0 ? (
         <Line
           data={{
             datasets: [
               {
                 data,
-                backgroundColor: "rgba(264, 12, 47, 0.5)",
-                borderColor: "#cc1034",
+                backgroundColor: color[casesType].fill,
+                borderColor: color[casesType].stroke,
               },
             ],
           }}
           options={options}
         />
       ) : null}
-      {/*<Line data={data} />*/}
     </div>
   );
 };

@@ -2,9 +2,9 @@
   "name": "corvid-19-tracker",
   "version": "0.1.0",
   "private": true,
+  "homepage": "https://nakryt.github.io/covid-19-tracker",
   "dependencies": {
     "@material-ui/core": "^4.11.2",
-    "@material-ui/icons": "^4.11.2",
     "@testing-library/jest-dom": "^5.11.8",
     "@testing-library/react": "^11.2.2",
     "@testing-library/user-event": "^12.6.0",
@@ -13,6 +13,7 @@
     "@types/react": "^16.14.2",
     "@types/react-dom": "^16.9.10",
     "chart.js": "^2.9.4",
+    "gh-pages": "^3.1.0",
     "leaflet": "^1.7.1",
     "node-sass": "^4.14.1",
     "numeral": "^2.0.6",
@@ -28,7 +29,9 @@
     "start": "react-scripts start",
     "build": "react-scripts build",
     "test": "react-scripts test",
-    "eject": "react-scripts eject"
+    "eject": "react-scripts eject",
+    "predeploy": "npm run build",
+    "deploy": "gh-pages -d build"
   },
   "eslintConfig": {
     "extends": [

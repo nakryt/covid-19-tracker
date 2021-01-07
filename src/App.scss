@@ -12,17 +12,17 @@
 
   .app__left {
     flex: 0.7;
-    padding: 1rem;
+    padding-right: 1rem;
     height: 100%;
 
     @include for-desktop-down {
       flex: 1;
+      padding-right: 0;
     }
   }
 
   .app__right {
     flex: 0.3;
-    max-height: 720px;
 
     @include for-desktop-down {
       flex: 1;
@@ -32,5 +32,9 @@
   .app__stats {
     display: flex;
     justify-content: space-between;
+
+    @include for-mobile {
+      flex-direction: column;
+    }
   }
 }

@@ -1,20 +1,28 @@
-@import "src/styles/colors";
+@import "../../styles/color";
 
 .table {
-  max-height: 370px;
+  max-height: calc(100vh - 350px);
   margin-top: 1.2rem;
   margin-bottom: 1rem;
   overflow: auto;
   color: $table-color;
 
   table {
+    width: 100%;
+    tr:nth-of-type(odd) {
+      background-color: $background-main;
+    }
+
     tr {
       display: flex;
       justify-content: space-between;
-    }
+      cursor: pointer;
+      padding: 1px;
+      border-radius: 5px;
 
-    tr:nth-of-type(odd) {
-      background-color: $background-main;
+      &:hover {
+        background-color: rgba(0, 0, 0, 0.2);
+      }
     }
 
     td {
