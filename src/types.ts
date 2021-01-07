@@ -1,4 +1,4 @@
-export interface ResponseData {
+export interface CountryData {
   updated: number;
   country: string;
   countryInfo: {
@@ -31,11 +31,6 @@ export interface ResponseData {
   criticalPerOneMillion: number;
 }
 
-export interface CountryData {
-  name: string;
-  value: string;
-}
-
 export interface DataForChart {
   cases: {
     [key: string]: number;
@@ -53,3 +48,5 @@ export interface MapCoordinates {
   lat: number;
   lng: number;
 }
+
+export type CaseType = "cases" | "recovered" | "deaths";

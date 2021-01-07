@@ -4,7 +4,7 @@ import "./App.scss";
 import { Card, CardContent } from "@material-ui/core";
 import "leaflet/dist/leaflet.css";
 
-import { MapCoordinates, ResponseData } from "./types";
+import { MapCoordinates, CountryData } from "./types";
 import Header from "./components/Header/Header";
 import InfoBox from "./components/InfoBox/InfoBox";
 import Map from "./components/Map/Map";
@@ -12,9 +12,9 @@ import Table from "./components/Table/Table";
 import LineGraph from "./components/LineGraph/LineGraph";
 
 function App() {
-  const [countries, setCountries] = useState<ResponseData[]>([]);
-  const [countryInfo, setCountryInfo] = useState<ResponseData>(
-    {} as ResponseData
+  const [countries, setCountries] = useState<CountryData[]>([]);
+  const [countryInfo, setCountryInfo] = useState<CountryData>(
+    {} as CountryData
   );
   const [center, setCenter] = useState<MapCoordinates>({
     lat: 34.80746,
@@ -27,7 +27,7 @@ function App() {
     const getCountryInfo = async () => {
       const response = await fetch("https://disease.sh/v3/covid-19/all");
       if (response.ok) {
-        const data = (await response.json()) as ResponseData;
+        const data = (await response.json()) as CountryData;
         setCountryInfo(data);
       }
     };
@@ -47,7 +47,7 @@ function App() {
           "https://disease.sh/v3/covid-19/countries"
         );
         if (response.ok) {
-          const data = (await response.json()) as ResponseData[];
+          const data = (await response.json()) as CountryData[];
           setCountries(data);
         }
       } catch (e) {}
@@ -64,12 +64,16 @@ function App() {
   }, [setCountries]);
 
   useEffect(() => {
-    const country = countries.find((c) => c.countryInfo.iso2 === countryIso2);
-    if (country) {
-      const { lat, long: lng } = country.countryInfo;
-      setCountryInfo(country);
-      setCenter({ lat, lng });
-      setZoom(4);
+    if (countryIso2 === "worldwide") {
+      setCenter({ lat: 34.80746, lng: -40.4796 });
+    } else {
+      const country = countries.find((c) => c.countryInfo.iso2 === countryIso2);
+      if (country) {
+        const { lat, long: lng } = country.countryInfo;
+        setCountryInfo(country);
+        setCenter({ lat, lng });
+        setZoom(4);
+      }
     }
   }, [countryIso2, setCountryInfo, setCenter, countries]);
 
@@ -81,6 +85,7 @@ function App() {
     recovered,
     deaths,
   } = countryInfo;
+
   return (
     <div className="app">
       <div className="app__left">
@@ -90,7 +95,12 @@ function App() {
           <InfoBox title="Recovered" cases={todayRecovered} total={recovered} />
           <InfoBox title="Deaths" cases={todayDeaths} total={deaths} />
         </div>
-        <Map center={center} zoom={zoom} />
+        <Map
+          center={center}
+          zoom={zoom}
+          countries={countries}
+          casesType="cases"
+        />
       </div>
 
       <Card className="app__right">

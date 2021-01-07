@@ -1,10 +1,10 @@
 import React, { FC } from "react";
 import "./Table.scss";
-import { ResponseData } from "../../types";
+import { CountryData } from "../../types";
 import { sortData } from "../../utils";
 
 interface Props {
-  countries: ResponseData[];
+  countries: CountryData[];
 }
 
 const Table: FC<Props> = ({ countries }) => {

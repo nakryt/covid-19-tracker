@@ -9,4 +9,26 @@
   .leaflet-container {
     height: 100%;
   }
+
+  .info-flag {
+    height: 80px;
+    width: 100%;
+    background-position: center center;
+    background-size: cover;
+    background-repeat: no-repeat;
+    border: 1px solid rgba(0, 0, 0, 0.2);
+    border-radius: 0.5rem;
+    margin-bottom: 0.5rem;
+  }
+  .info-name {
+    font-size: 1.2rem;
+    font-weight: bold;
+    color: #555;
+  }
+  .info-confirmed,
+  .info-recovered,
+  .info-deaths {
+    font-size: 1rem;
+    margin-top: 0.3rem;
+  }
 }

@@ -1,10 +1,10 @@
 import React, { ChangeEvent, FC, useState } from "react";
 import "./Header.scss";
 import { FormControl, MenuItem, Select } from "@material-ui/core";
-import { ResponseData } from "../../types";
+import { CountryData } from "../../types";
 
 interface Props {
-  countries: ResponseData[];
+  countries: CountryData[];
   setCountryIso2: (iso2: string) => void;
 }
 
