@@ -5,9 +5,6 @@ import { Line } from "react-chartjs-2";
 import numeral from "numeral";
 import { ChartData, DataForChart } from "../../types";
 import { formatCartData } from "../../utils";
-import { CardContent } from "@material-ui/core";
-
-interface Props {}
 
 const options = {
   legend: false,
@@ -31,8 +28,9 @@ const options = {
       {
         type: "time",
         time: {
-          format: "MM/DD/YY",
+          // format: "MM/DD/YY",
           tooltipFormat: "ll",
+          parser: "MM/DD/YY",
         },
       },
     ],
@@ -79,7 +77,7 @@ const LineGraph = () => {
 
   return (
     <div className="lineGraph">
-      <h3>Worldwide new cases</h3>
+      <h3 className="lineGraph__title">Worldwide new cases</h3>
       {Object.keys(data).length > 0 ? (
         <Line
           data={{

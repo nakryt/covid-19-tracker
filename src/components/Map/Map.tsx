@@ -1,10 +1,21 @@
-import React from "react";
+import React, { FC } from "react";
 import "./Map.scss";
 
-const Map = () => {
+import { MapContainer } from "react-leaflet";
+import { MapCoordinates } from "../../types";
+import MapView from "./MapView";
+
+interface Props {
+  center: MapCoordinates;
+  zoom: number;
+}
+
+const Map: FC<Props> = ({ center, zoom }) => {
   return (
     <div className="map">
-      <h2>Map</h2>
+      <MapContainer attributionControl={true} center={center} zoom={zoom}>
+        <MapView center={center} zoom={zoom} />
+      </MapContainer>
     </div>
   );
 };

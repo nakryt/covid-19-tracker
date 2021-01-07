@@ -1,26 +1,29 @@
 @import "src/styles/colors";
 
 .table {
-  height: 400px;
+  max-height: 370px;
   margin-top: 1.2rem;
+  margin-bottom: 1rem;
   overflow: auto;
   color: $table-color;
 
-  tr {
-    display: flex;
-    justify-content: space-between;
-  }
+  table {
+    tr {
+      display: flex;
+      justify-content: space-between;
+    }
 
-  tr:nth-of-type(odd) {
-    background-color: $background-main;
-  }
+    tr:nth-of-type(odd) {
+      background-color: $background-main;
+    }
 
-  td {
-    padding: 0.5rem;
+    td {
+      padding: 0.5rem;
 
-    span {
-      margin-right: 0.5rem;
-      font-weight: 800;
+      span {
+        margin-right: 0.5rem;
+        font-weight: 800;
+      }
     }
   }
 }

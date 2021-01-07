@@ -1,6 +1,9 @@
 .lineGraph {
-  h3 {
-    margin-top: 1rem;
+  .lineGraph__title {
     margin-bottom: 1rem;
+  }
+
+  canvas {
+    max-height: 300px;
   }
 }

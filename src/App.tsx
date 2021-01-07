@@ -2,11 +2,12 @@ import React, { useEffect, useState } from "react";
 import "./App.scss";
 
 import { Card, CardContent } from "@material-ui/core";
+import "leaflet/dist/leaflet.css";
 
+import { MapCoordinates, ResponseData } from "./types";
 import Header from "./components/Header/Header";
 import InfoBox from "./components/InfoBox/InfoBox";
 import Map from "./components/Map/Map";
-import { ResponseData } from "./types";
 import Table from "./components/Table/Table";
 import LineGraph from "./components/LineGraph/LineGraph";
 
@@ -15,6 +16,12 @@ function App() {
   const [countryInfo, setCountryInfo] = useState<ResponseData>(
     {} as ResponseData
   );
+  const [center, setCenter] = useState<MapCoordinates>({
+    lat: 34.80746,
+    lng: -40.4796,
+  });
+  const [zoom, setZoom] = useState(3);
+  const [countryIso2, setCountryIso2] = useState("");
 
   useEffect(() => {
     const getCountryInfo = async () => {
@@ -33,6 +40,39 @@ function App() {
     };
   }, []);
 
+  useEffect(() => {
+    const getCountriesData = async () => {
+      try {
+        const response = await fetch(
+          "https://disease.sh/v3/covid-19/countries"
+        );
+        if (response.ok) {
+          const data = (await response.json()) as ResponseData[];
+          setCountries(data);
+        }
+      } catch (e) {}
+    };
+
+    let isCancel = false;
+    if (!isCancel) {
+      getCountriesData();
+    }
+
+    return () => {
+      isCancel = true;
+    };
+  }, [setCountries]);
+
+  useEffect(() => {
+    const country = countries.find((c) => c.countryInfo.iso2 === countryIso2);
+    if (country) {
+      const { lat, long: lng } = country.countryInfo;
+      setCountryInfo(country);
+      setCenter({ lat, lng });
+      setZoom(4);
+    }
+  }, [countryIso2, setCountryInfo, setCenter, countries]);
+
   const {
     todayCases,
     todayRecovered,
@@ -44,23 +84,19 @@ function App() {
   return (
     <div className="app">
       <div className="app__left">
-        <Header
-          setCountryInfo={setCountryInfo}
-          setCountries={setCountries}
-          countries={countries}
-        />
+        <Header countries={countries} setCountryIso2={setCountryIso2} />
         <div className="app__stats">
           <InfoBox title="Coronavirus cases" cases={todayCases} total={cases} />
           <InfoBox title="Recovered" cases={todayRecovered} total={recovered} />
           <InfoBox title="Deaths" cases={todayDeaths} total={deaths} />
         </div>
-        <Map />
+        <Map center={center} zoom={zoom} />
       </div>
+
       <Card className="app__right">
         <CardContent>
           <h3>Live Cases By Country</h3>
           <Table countries={countries} />
-
           <LineGraph />
         </CardContent>
       </Card>

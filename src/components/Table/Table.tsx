@@ -10,17 +10,21 @@ interface Props {
 const Table: FC<Props> = ({ countries }) => {
   return (
     <div className="table">
-      {sortData(countries).map(({ country, cases }, index) => (
-        <tr>
-          <td>
-            <span>{index + 1}</span>
-            {country}
-          </td>
-          <td>
-            <strong>{cases}</strong>
-          </td>
-        </tr>
-      ))}
+      <table>
+        <tbody>
+          {sortData(countries).map(({ country, cases }, index) => (
+            <tr key={country}>
+              <td>
+                <span>{index + 1}</span>
+                {country}
+              </td>
+              <td>
+                <strong>{cases}</strong>
+              </td>
+            </tr>
+          ))}
+        </tbody>
+      </table>
     </div>
   );
 };

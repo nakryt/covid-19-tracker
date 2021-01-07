@@ -49,3 +49,7 @@ export interface DataForChart {
 }
 
 export type ChartData = { x: string; y: number }[];
+export interface MapCoordinates {
+  lat: number;
+  lng: number;
+}
