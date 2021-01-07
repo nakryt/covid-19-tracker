@@ -16,7 +16,12 @@ interface Props {
 const Map: FC<Props> = ({ countries, center, zoom, casesType }) => {
   return (
     <div className="map">
-      <MapContainer attributionControl={true} center={center} zoom={zoom}>
+      <MapContainer
+        attributionControl={true}
+        center={center}
+        zoom={zoom}
+        closePopupOnClick={true}
+      >
         <MapView center={center} zoom={zoom} />
         {showDataOnMap(countries, casesType)}
       </MapContainer>

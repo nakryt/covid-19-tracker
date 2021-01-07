@@ -1,13 +1,24 @@
+@import "src/styles/breakpoints";
+
 .map {
-  height: 500px;
+  height: 420px;
   background-color: #fff;
   padding: 1rem;
   margin-top: 1rem;
   border-radius: 1.2rem;
   box-shadow: 0 0 8px -4px rgba(0, 0, 0, 0.5);
 
+  @include for-desktop-down {
+    margin-bottom: 1rem;
+  }
+
   .leaflet-container {
     height: 100%;
+
+    @include for-mobile {
+      padding: 0.5rem;
+      border-radius: 10px;
+    }
   }
 
   .info-flag {

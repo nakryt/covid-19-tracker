@@ -1,2 +1,69 @@
+@import "../../styles/color";
+@import "../../styles/breakpoints";
+
 .infoBox {
+  flex: 1;
+  cursor: pointer;
+  margin-top: 10px !important;
+  padding-bottom: 0 !important;
+  transition: border-top 0ms !important;
+
+  &.MuiButton-text {
+    padding: 0;
+  }
+
+  .MuiPaper-root {
+    flex: 1;
+  }
+
+  .MuiCardContent-root {
+    padding: 0.5rem;
+  }
+
+  .MuiCardContent-root:last-child {
+    padding-bottom: 0.5rem;
+  }
+
+  .infoBox__cases--green {
+    color: $green;
+  }
+
+  .infoBox__title {
+    @include for-tablet-down {
+      font-size: 0.8rem;
+    }
+  }
+
+  .infoBox__cases {
+    color: $red;
+    font-weight: 600;
+    font-size: 1.75rem;
+
+    @include for-tablet-down {
+      font-size: 1rem;
+    }
+  }
+
+  .infoBox__total {
+    color: $grey;
+    font-weight: 700;
+    font-size: 0.8rem;
+  }
+}
+
+.infoBox:not(:last-child) {
+  margin-right: 1rem;
+
+  @include for-mobile {
+    margin-right: 0;
+  }
+}
+
+.infoBox.infoBox--selected {
+  border-top: 10px solid;
+  margin-top: 0 !important;
+}
+
+.infoBox--red {
+  border-color: red !important;
 }
