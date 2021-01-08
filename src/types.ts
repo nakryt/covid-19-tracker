@@ -43,6 +43,10 @@ export interface DataForChart {
   };
 }
 
+export interface DataForChartCountry {
+  timeline: DataForChart;
+}
+
 export type ChartData = { x: string; y: number }[];
 export interface MapCoordinates {
   lat: number;

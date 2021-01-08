@@ -11,17 +11,18 @@ export const formatCartData = (
   casesType: CaseType = "cases"
 ) => {
   const chartData: ChartData = [];
-  let lastDatePoint: number = 0;
-  for (let date in data[casesType]) {
-    if (lastDatePoint) {
+  let lastDatePoint: number | undefined;
+  Object.entries(data[casesType]).forEach(([date, value]) => {
+    if (lastDatePoint !== undefined) {
+      const numberCases = value - lastDatePoint;
       const newDataPoint = {
         x: date,
-        y: data[casesType][date] - lastDatePoint,
+        y: numberCases < 0 ? 0 : numberCases,
       };
       chartData.push(newDataPoint);
     }
-    lastDatePoint = data[casesType][date];
-  }
+    lastDatePoint = value;
+  });
   return chartData;
 };
 

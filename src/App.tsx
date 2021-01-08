@@ -141,7 +141,10 @@ function App() {
             setCountryIso2={setCountryIso2}
             countryIso2={countryIso2}
           />
-          <LineGraph casesType={casesType} />
+          <LineGraph
+            casesType={casesType}
+            country={countryInfo.country || "worldwide"}
+          />
         </CardContent>
       </Card>
     </div>
