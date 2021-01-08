@@ -143,7 +143,11 @@ function App() {
           />
           <LineGraph
             casesType={casesType}
-            country={countryInfo.country || "worldwide"}
+            country={
+              countryIso2 === "worldwide" || !countryInfo.country
+                ? "worldwide"
+                : countryInfo.country
+            }
           />
         </CardContent>
       </Card>
