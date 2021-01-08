@@ -135,7 +135,7 @@ function App() {
 
       <Card className="app__right">
         <CardContent>
-          <h3>Live Cases By Country</h3>
+          <h3 className="table__title">Live Cases By Country</h3>
           <Table
             countries={countries}
             setCountryIso2={setCountryIso2}

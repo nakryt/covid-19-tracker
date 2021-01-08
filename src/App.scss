@@ -24,8 +24,15 @@
   .app__right {
     flex: 0.3;
 
+    .MuiCardContent-root {
+      height: 100%;
+    }
+
     @include for-desktop-down {
       flex: 1;
+    }
+    .table__title {
+      text-align: center;
     }
   }
 
